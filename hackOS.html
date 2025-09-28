@@ -1,252 +1,236 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.1">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<!DOCTYPE html PUBLIC “—//W3C//DTD HTML 4.01//EN” “https://www.w3.org/TR/html4/strict.dtd”>
+
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hackOS</title>
+<style>  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+
+  html, body { height: 100%; }
+
+  /* Background */
+  body {
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Rainier20200906.jpg/1024px-Rainier20200906.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e0e0e0;
+    transition: color 0.3s, background-color 0.3s;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    backdrop-filter: blur(10px) brightness(0.75);
+    z-index: -1;
+  }
+
+  /* Dark mode detection */
+  @media (prefers-color-scheme: dark) {
+    body { color: #f5f5f7; }
+  }
+
+  a { text-decoration: none; }
+
+  /* Navigation */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    position: fixed;
+    top:0; left:0; width:100%;
+    z-index: 100;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+  }
+  header h1 { font-size: 1.8rem; color: #e0f7ff; }
+  nav a { margin-left: 2rem; color: white; font-weight: 500; transition: 0.3s; }
+  nav a:hover { color: #00ffff; }
+
+  /* Hero */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    padding: 0 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s forwards 0.3s;
+  }
+  .hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    color: #ddd;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .hero .download-btn {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    background: #00bfff;
+    color: #fff;
+    transition: background 0.3s;
+  }
+  .hero .download-btn:hover { background: #0099cc; }
+
+  /* Sections */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s forwards;
+  }
+  section h3 {
+    font-size: 2.5rem;
+    color: #ccefff;
+    margin-bottom: 3rem;
+  }
+
+  /* Features Section background */
+  #features {
+    background: rgba(0,0,0,0.35);
+    border-radius: 16px;
+    padding: 6rem 2rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 2rem;
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+  .feature-card h4 { color: #e0f7ff; font-size: 1.4rem; margin-bottom: 1rem; } /* lighter h4 */
+  .feature-card p { color: #eee; font-size: 1rem; }
+
+  .screenshots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 1.5rem;
+  }
+  .screenshots img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .screenshots img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .hero h2 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    header { padding: 1rem 1.5rem; }
+  }</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html PUBLIC “—//W3C//DTD HTML 4.01//EN” “https://www.w3.org/TR/html4/strict.dtd”&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;html lang="en"&gt;&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;hackOS&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;<span class="Apple-converted-space">  </span>* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>html, body { height: 100%; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Background with blur */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Rainier20200906.jpg/1024px-Rainier20200906.jpg') no-repeat center center fixed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background-size: cover;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #e0e0e0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: color 0.3s, background-color 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>body::before {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content: "";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top:0; left:0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width:100%; height:100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(10px) brightness(0.75);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>z-index: -1;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Dark mode detection */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>@media (prefers-color-scheme: dark) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body { color: #f5f5f7; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>a { text-decoration: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Navigation */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top:0; left:0; width:100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>z-index: 100;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,0,0,0.3);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(10px);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>header h1 { font-size: 1.8rem; color: #e0f7ff; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>nav a { margin-left: 2rem; color: white; font-weight: 500; transition: 0.3s; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>nav a:hover { color: #00ffff; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Hero */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(30px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeIn 1s forwards 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero h2 {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-shadow: 0 4px 15px rgba(0,0,0,0.5);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero p {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 1.2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 600px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-shadow: 0 2px 10px rgba(0,0,0,0.5);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero .download-btn {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: #00bfff;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero .download-btn:hover { background: #0099cc; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Sections */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>section {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 6rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 1200px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(30px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeIn 1s forwards;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>section h3 {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 2.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #ccefff; /* slightly lighter */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Features Section darker background */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>#features {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,0,0,0.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 6rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.features-grid {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(auto-fit, minmax(250px,1fr));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.feature-card {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.2);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(10px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: transform 0.3s, box-shadow 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.feature-card:hover {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(-10px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 8px 25px rgba(0,0,0,0.3);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.feature-card h4 { color: #e0f7ff; font-size: 1.4rem; margin-bottom: 1rem; } /* lighter h4 */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.feature-card p { color: #eee; font-size: 1rem; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.screenshots {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(auto-fit, minmax(250px,1fr));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.screenshots img {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 6px 20px rgba(0,0,0,0.5);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: transform 0.3s, box-shadow 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.screenshots img:hover {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: scale(1.05);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 8px 25px rgba(0,0,0,0.7);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Footer */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>footer {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 3rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,0,0,0.5);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(10px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>@keyframes fadeIn {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>to { opacity: 1; transform: translateY(0); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 600px) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero h2 { font-size: 2.2rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero p { font-size: 1rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header { padding: 1rem 1.5rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;hackOS&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#features"&gt;Features&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#screenshots"&gt;Screenshots&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#hero"&gt;Download&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/nav&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="hero" id="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;hackOS Rainier&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;Sleek, modern, and macOS-inspired. Free software built for elegance and productivity on Linux.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;a class="download-btn" href="https://example.com/hackos-rainier.iso" download=""&gt;Download ISO&lt;/a&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section id="features"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h3&gt;Features&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="features-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="feature-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;WhiteSur GTK Theme&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Beautiful macOS-inspired theme for a clean and consistent look across applications.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="feature-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;Colloid Icons&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Rounded, elegant icons for a modern interface and effortless navigation.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="feature-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;Plank Dock&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;macOS-style dock with custom launchers and intelligent auto-hide functionality.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="feature-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;GNOME Layout&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Preconfigured dock, extensions, and workspace layouts for instant productivity.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section id="screenshots"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h3&gt;Screenshots&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="screenshots"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://via.placeholder.com/400x250.png?text=Desktop+1" alt="Screenshot 1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://via.placeholder.com/400x250.png?text=Desktop+2" alt="Screenshot 2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://via.placeholder.com/400x250.png?text=Plank+Dock" alt="Screenshot 3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://via.placeholder.com/400x250.png?text=Colloid+Icons" alt="Screenshot 4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1">&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;strong&gt;Legal &amp;amp; Credits:&lt;/strong&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>Background image: Mount Rainier © Caleb Riston / Wikimedia Commons</p>
-<p class="p1"><span class="Apple-converted-space">  </span>Screenshots: placeholders / your content&lt;br&gt;&amp;nbsp;WhiteSur GTK Theme, and Colloid icons are free software. All other trademarks and images are property of their respective owners.&amp;nbsp;&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>// Fade-in sections on scroll</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const sections = document.querySelectorAll('section');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const options = { threshold: 0.1 };</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const observer = new IntersectionObserver((entries, observer) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>entries.forEach(entry =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(entry.isIntersecting) entry.target.style.animation = "fadeIn 1s forwards";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}, options);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>sections.forEach(section =&gt; observer.observe(section));</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;&lt;/html&gt;</p>
-</body>
-</html>
+
+<header>
+  <h1>hackOS</h1>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#screenshots">Screenshots</a>
+    <a href="#hero">Download</a>
+  </nav>
+</header>
+
+<div class="hero" id="hero">
+  <h2>hackOS Rainier</h2>
+  <p>Sleek, modern, and macOS-inspired. Free software built for elegance and productivity on Linux.</p>
+  <a class="download-btn" href="https://example.com/hackos-rainier.iso" download="">Download ISO</a>
+</div>
+
+<section id="features">
+  <h3>Features</h3>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h4>WhiteSur GTK Theme</h4>
+      <p>Beautiful macOS-inspired theme for a clean and consistent look across applications.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Colloid Icons</h4>
+      <p>Rounded, elegant icons for a modern interface and effortless navigation.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Plank Dock</h4>
+      <p>macOS-style dock with custom launchers and intelligent auto-hide functionality.</p>
+    </div>
+    <div class="feature-card">
+      <h4>GNOME Layout</h4>
+      <p>Preconfigured dock, extensions, and workspace layouts for instant productivity.</p>
+    </div>
+  </div>
+</section>
+
+<section id="screenshots">
+  <h3>Screenshots</h3>
+  <div class="screenshots">
+    <img src="https://via.placeholder.com/400x250.png?text=Desktop+1" alt="Screenshot 1">
+    <img src="https://via.placeholder.com/400x250.png?text=Desktop+2" alt="Screenshot 2">
+    <img src="https://via.placeholder.com/400x250.png?text=Plank+Dock" alt="Screenshot 3">
+    <img src="https://via.placeholder.com/400x250.png?text=Colloid+Icons" alt="Screenshot 4">
+  </div>
+</section>
+
+
+
+<footer>
+  <strong>Legal &amp; Credits:</strong><br>
+  Background image: Mount Rainier © Caleb Riston / Wikimedia Commons
+  Screenshots: placeholders / your content<br>&nbsp;WhiteSur GTK Theme, and Colloid icons are free software. All other trademarks and images are property of their respective owners.&nbsp;</footer>
+
+<script>
+  // Fade-in sections on scroll
+  const sections = document.querySelectorAll('section');
+  const options = { threshold: 0.1 };
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.style.animation = "fadeIn 1s forwards";
+    });
+  }, options);
+  sections.forEach(section => observer.observe(section));
+</script>
+
+
+
+</body></html>
