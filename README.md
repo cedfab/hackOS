@@ -9,7 +9,7 @@ For compatibility - it is gonna have [Darling](https://www.darlinghq.org/) for y
 For looks, it uses the basic dash-to-dock extension for gnome and a few tweaks.
 
 # Release
-It is planned to release **today** as it is currently in the testing phase.
+It is planned to release **30th September** as it is currently in the testing phase.
 
 # Future of the project
 hackOS will be updated *probably: if the project won't fail* and i will try to develop my own software for it.
