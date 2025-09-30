@@ -1,4 +1,4 @@
-# hackOS [![temp-Imagef3m-Wkd.avif](https://i.postimg.cc/3NV97nvh/temp-Imagef3m-Wkd.avif)](https://postimg.cc/SYLcfLd1)
+# hackOS [![temp-Image11bs-U4.avif](https://i.postimg.cc/6pjVNHJH/temp-Image11bs-U4.avif)](https://postimg.cc/LJPgt3sf)
 hackOS is a Ubuntu derivative that is **right about to release** for x86.
 It is made for replacing a hackintosh, as macOS 26 is the last one to support intel.
 
