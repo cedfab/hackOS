@@ -4,6 +4,9 @@
 hackOS is a Ubuntu derivative that is **right about to release** for x86.
 It is made for replacing a hackintosh, as macOS 26 is the last one to support intel.
 
+## NOTICE
+The OS is optimized for laptops, so it can have some cosmetic issues with a desktop.
+
 ## Compatibility
 For compatibility - it is gonna have [Darling](https://www.darlinghq.org/) for you to use a few macOS apps.
 
